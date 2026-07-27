@@ -12,8 +12,8 @@ proxies:
   alpn:
   - h3
   protocol: udp
-  up: 11 Mbps Mbps
-  down: 55 Mbps Mbps
+  up: 11 Mbps
+  down: 55 Mbps
 - name: hysteria-gitlab
   type: hysteria
   server: 62.210.70.191
@@ -33,8 +33,8 @@ proxies:
   password: github.com/Alvin9999-newpac/fanqiang
   sni: bing.com
   skip-cert-verify: true
-  up: 11 mbps Mbps
-  down: 55 mbps Mbps
+  up: 11 Mbps
+  down: 55 Mbps
 - name: xray-proxy
   type: vless
   server: 62.210.70.194
@@ -52,6 +52,6 @@ proxies:
   server: engage.cloudflareclient.com
   port: 2408
   ip: 172.16.0.2/32
-  private-key: KHD5jVJjPgi2accen2cy4dpxMFdtA+dOHXvVAj3hgkc=
+  private-key: +OLtL27TVpSPj0jFRJQ/nx1bLZfV52LyVHrF216GAlw=
   public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
   mtu: 1280
