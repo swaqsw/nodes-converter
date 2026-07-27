@@ -424,9 +424,76 @@ def main():
     else:
         print("[WARP] No cached config")
 
+    # Sing-box config with WARP chain
+    if warp:
+        print("\n" + "=" * 60)
+        print("Step 5: Generating sing-box config (proxy -> WARP chain)...")
+        print("=" * 60)
+
+        sg_outbounds = []
+        for n in all_nodes:
+            p = n["protocol"]
+            tag = n["name"][:40]
+            if p in ("hysteria", "hysteria2"):
+                sg_outbounds.append({
+                    "type": p, "tag": tag,
+                    "server": n["server"], "server_port": n["port"],
+                    ("auth_str" if p == "hysteria" else "password"): n.get("auth", ""),
+                    "tls": {"enabled": True, "insecure": n.get("skip_cert_verify", False),
+                            "server_name": n.get("sni", ""),
+                            "alpn": n.get("alpn", ["h3"])},
+                })
+                if p == "hysteria":
+                    sg_outbounds[-1]["up_mbps"] = int(safe_float(n.get("up"), 11))
+                    sg_outbounds[-1]["down_mbps"] = int(safe_float(n.get("down"), 55))
+            elif p == "vless":
+                ob = {
+                    "type": "vless", "tag": tag,
+                    "server": n["server"], "server_port": n["port"],
+                    "uuid": n.get("uuid", ""), "flow": "",
+                    "transport": {"type": n.get("network", "tcp")},
+                }
+                if n.get("security") == "reality":
+                    ob["tls"] = {"enabled": True, "server_name": n.get("sni", ""),
+                                  "reality": {"enabled": True, "public_key": n.get("pbk", ""),
+                                              "short_id": n.get("sid", "")},
+                                  "utls": {"enabled": True, "fingerprint": "chrome"}}
+                else:
+                    ob["tls"] = {"enabled": False}
+                if n.get("path"):
+                    ob["transport"]["path"] = n["path"]
+                sg_outbounds.append(ob)
+
+        # WARP outbound
+        sg_outbounds.append(warp_singbox(warp))
+        # Detour outbound: proxy -> WARP
+        proxy_tags = [ob["tag"] for ob in sg_outbounds if ob["type"] not in ("wireguard", "selector")]
+        sg_outbounds.append({
+            "type": "selector", "tag": "proxy", "outbounds": proxy_tags,
+        })
+
+        sg_config = {
+            "log": {"level": "info"},
+            "inbounds": [{"type": "mixed", "tag": "mixed-in", "listen": "127.0.0.1", "listen_port": 1080}],
+            "outbounds": sg_outbounds,
+            "route": {
+                "rules": [
+                    {"outbound": "warp-out", "network": "udp"},
+                    {"outbound": "warp-out", "domain_suffix": ["google.com", "youtube.com", "twitter.com", "github.com", "openai.com", "cloudflare.com"]},
+                    {"outbound": "proxy", "geosite": "geolocation-!cn"},
+                    {"outbound": "direct", "geosite": "cn"},
+                    {"outbound": "direct", "geoip": "cn"},
+                ],
+                "final": "warp-out",
+            },
+        }
+        (OUTPUT_DIR / "singbox_config.json").write_text(
+            json.dumps(sg_config, indent=2, ensure_ascii=False), encoding="utf-8")
+        print("[OK] singbox_config.json (proxy -> WARP chain)")
+
     # Write outputs
     print("\n" + "=" * 60)
-    print("Step 5: Writing outputs...")
+    print("Step 6: Writing remaining outputs...")
     print("=" * 60)
 
     (OUTPUT_DIR / "share_links.txt").write_text("\n".join(uris), encoding="utf-8")
