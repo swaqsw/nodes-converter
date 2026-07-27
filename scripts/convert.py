@@ -294,14 +294,14 @@ def clash_proxy(node: dict) -> dict | None:
             "auth-str": node.get("auth", ""), "sni": node.get("sni", ""),
             "skip-cert-verify": node.get("skip_cert_verify", False),
             "alpn": node.get("alpn", ["h3"]), "protocol": "udp",
-            "up": f"{node.get('up', '11') or '11'} Mbps", "down": f"{node.get('down', '55') or '55'} Mbps",
+            "up": f"{safe_float(node.get('up'), 11):.0f} Mbps", "down": f"{safe_float(node.get('down'), 55):.0f} Mbps",
         }
     elif p == "hysteria2":
         return {
             "name": node["name"], "type": "hysteria2", "server": node["server"], "port": node["port"],
             "password": node.get("auth", ""), "sni": node.get("sni", ""),
             "skip-cert-verify": node.get("skip_cert_verify", False),
-            "up": f"{node.get('up', '11') or '11'} Mbps", "down": f"{node.get('down', '55') or '55'} Mbps",
+            "up": f"{safe_float(node.get('up'), 11):.0f} Mbps", "down": f"{safe_float(node.get('down'), 55):.0f} Mbps",
         }
     elif p == "vless":
         c = {
