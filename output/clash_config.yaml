@@ -1,0 +1,57 @@
+mixed-port: 7890
+allow-lan: false
+log-level: info
+proxies:
+- name: https://github.com/Alvin9999-newpac/fanqiang
+  type: hysteria
+  server: 62.210.70.191
+  port: 23556
+  auth-str: github.com/Alvin9999-newpac/fanqiang
+  sni: bing.com
+  skip-cert-verify: true
+  alpn:
+  - h3
+  protocol: udp
+  up: 11 Mbps Mbps
+  down: 55 Mbps Mbps
+- name: hysteria-gitlab
+  type: hysteria
+  server: 62.210.70.191
+  port: 23556
+  auth-str: github.com/Alvin9999-newpac/fanqiang
+  sni: bing.com
+  skip-cert-verify: true
+  alpn:
+  - h3
+  protocol: udp
+  up: 11 Mbps
+  down: 55 Mbps
+- name: hysteria2-gitlab
+  type: hysteria2
+  server: 62.210.7.139
+  port: 60111
+  password: github.com/Alvin9999-newpac/fanqiang
+  sni: bing.com
+  skip-cert-verify: true
+  up: 11 mbps Mbps
+  down: 55 mbps Mbps
+- name: xray-proxy
+  type: vless
+  server: 62.210.70.194
+  port: 37783
+  uuid: a289c660-1b12-432b-a06c-c2ae469272b0
+  network: xhttp
+  tls: true
+  servername: www.yahoo.com
+  reality-opts:
+    public-key: tQeEamJmYVUUfjRLX7ETvMnPj4DrHzRhR5TI684oYgg
+    short-id: 21569dd6
+  client-fingerprint: chrome
+- name: WARP
+  type: wireguard
+  server: engage.cloudflareclient.com
+  port: 2408
+  ip: 172.16.0.2/32
+  private-key: KHD5jVJjPgi2accen2cy4dpxMFdtA+dOHXvVAj3hgkc=
+  public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+  mtu: 1280
