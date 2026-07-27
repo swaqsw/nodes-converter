@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Nodes Converter �?每日�?GitLab 源拉取代理节点配置，转换�?v2rayN / Clash 格式，并可选套 WARP 出站�?"""
+Nodes Converter — 每日从 GitLab 源拉取代理节点配置，转换为 v2rayN / Clash 格式，并可选套 WARP 出站。
+"""
 import json
 import yaml
 import os
@@ -10,7 +11,7 @@ import requests
 from pathlib import Path
 
 # ============================================================
-# Configuration �?modify these for your own fork
+# Configuration — modify these for your own fork
 # ============================================================
 GITLAB_SOURCES = {
     # clash.meta config
@@ -374,14 +375,10 @@ def load_warp_config() -> dict | None:
 
 def build_warp_singbox_outbound(warp: dict) -> dict:
     """Build sing-box WireGuard outbound for WARP."""
-    local_addr = warp.get("local_address")
-    if not isinstance(local_addr, list) or not local_addr:
-        local_addr = ["172.16.0.2/32"]
-
     return {
         "type": "wireguard",
         "tag": "warp-out",
-        "local_address": local_addr,
+        "local_address": warp.get("local_address", ["172.16.0.2/32"]),
         "private_key": warp.get("private_key", ""),
         "mtu": 1280,
         "peers": [{
@@ -542,7 +539,7 @@ def main():
         # Generate sing-box config with WARP
         warp_outbound = build_warp_singbox_outbound(warp_config)
 
-        # Build sing-box with chain: inbound �?selector �?proxy �?WARP
+        # Build sing-box with chain: inbound → selector → proxy → WARP
         sg_outbounds = []
         for node in all_nodes:
             proto = node["protocol"]
@@ -604,7 +601,7 @@ def main():
         # Add WARP outbound
         sg_outbounds.append(warp_outbound)
 
-        # Add selector + urltest that chains through node �?WARP
+        # Add selector + urltest that chains through node → WARP
         sg_outbounds.append({
             "type": "selector",
             "tag": "proxy",
@@ -636,7 +633,7 @@ def main():
             json.dump(sg_config, f, indent=2, ensure_ascii=False)
         print("[OK] singbox_config.json (with WARP)")
     else:
-        print("[WARP] No cached config �?run scripts/warp.py first, or action will auto-register")
+        print("[WARP] No cached config — run scripts/warp.py first, or action will auto-register")
         print("[WARP] If running in GitHub Actions, WARP registration is automatic.")
 
     # 5. Write output files
