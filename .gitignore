@@ -1,0 +1,6 @@
+# gitignore for nodes-converter
+__pycache__/
+*.pyc
+output/warp_config.json
+output/warp_key.json
+.env
