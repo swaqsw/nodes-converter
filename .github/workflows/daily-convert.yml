@@ -114,5 +114,6 @@ jobs:
           git add output/ README.md
           git diff --staged --quiet || (
             git commit -m "🔄 Daily update $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+            git pull --rebase origin main
             git push
           )
