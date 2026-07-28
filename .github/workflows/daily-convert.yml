@@ -1,0 +1,78 @@
+name: Daily Nodes Converter (with WARP)
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install requests pyyaml urllib3 cryptography
+      - name: Setup WARP
+        run: python scripts/warp_setup.py
+      - name: Convert Nodes
+        run: python scripts/convert.py
+      - name: Generate README
+        run: |
+          python -c "
+import json
+from pathlib import Path
+from datetime import datetime, timezone, timedelta
+nodes = json.loads(Path('output/all_nodes.json').read_text())
+stats = {}
+for n in nodes:
+    p = n.get('protocol', 'unknown')
+    stats[p] = stats.get(p, 0) + 1
+now = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime('%Y-%m-%d %H:%M')
+w = 'yes' if Path('output/warp_config.json').exists() else 'no'
+lines = [
+    '# Proxy Nodes Converter',
+    '',
+    f'> Updated: {now} CST | WARP: {w} | Daily 5:00 AM auto',
+    '',
+    '## Stats',
+    '',
+    '| Protocol | Count |',
+    '|----------|-------|',
+]
+for p, c in sorted(stats.items()):
+    lines.append(f'| {p} | {c} |')
+lines.append(f'| **Total** | **{len(nodes)}** |')
+lines.extend([
+    '',
+    '## Files',
+    '',
+    '| File | Use |',
+    '|------|-----|',
+    '| [share_links.txt](output/share_links.txt) | v2rayN / Nekoray import |',
+    '| [subscription_b64.txt](output/subscription_b64.txt) | Base64 sub |',
+    '| [clash_config.yaml](output/clash_config.yaml) | Clash Meta config |',
+    '| [singbox_config.json](output/singbox_config.json) | sing-box with WARP chain |',
+    '| [all_nodes.json](output/all_nodes.json) | Raw node data |',
+])
+Path('README.md').write_text('\n'.join(lines), encoding='utf-8')
+print(f'OK: {len(nodes)} nodes')
+          "
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/ README.md
+          git diff --staged --quiet || (
+            git commit -m "Daily update $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+            git pull --rebase origin main
+            git push
+          )
