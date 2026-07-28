@@ -1,37 +1,28 @@
-# 🚀 Proxy Nodes Converter
+# Proxy Nodes Converter
 
-> 最后更新: 2026-07-27 17:58 CST | WARP: ✅ | 每日 5:00 AM 自动运行
+> Updated: 2026-07-28 15:41 CST | WARP: yes | Daily 5:00 AM auto
 
-## 📊 节点统计
+## Stats
 
-| 协议 | 数量 |
-|------|------|
+| Protocol | Count |
+|----------|-------|
 | hysteria | 2 |
 | hysteria2 | 1 |
 | juicity | 1 |
 | vless | 1 |
-| **总计** | **5** |
+| **Total** | **5** |
 
-## 📦 输出文件
+## Files
 
-| 文件 | 用途 |
-|------|------|
-| [share_links.txt](output/share_links.txt) | v2rayN / Nekoray 可直接导入的节点链接 |
-| [subscription_b64.txt](output/subscription_b64.txt) | Base64 编码的订阅链接 |
-| [clash_config.yaml](output/clash_config.yaml) | Clash Meta / Mihomo 完整配置 |
-| [singbox_config.json](output/singbox_config.json) | sing-box 配置（含 WARP 出站） |
-| [all_nodes.json](output/all_nodes.json) | 所有节点结构化数据 |
+| File | Use |
+|------|-----|
+| [share_links.txt](output/share_links.txt) | v2rayN / Nekoray import |
+| [subscription_b64.txt](output/subscription_b64.txt) | Base64 sub |
+| [clash_config.yaml](output/clash_config.yaml) | Clash Meta config |
+| [singbox_config.json](output/singbox_config.json) | sing-box with WARP chain |
+| [all_nodes.json](output/all_nodes.json) | Raw node data |
 
-## 🛡️ WARP 集成
+## WARP Chain
 
-已自动集成 Cloudflare WARP 作为备用出站。
-sing-box 配置中所有节点流量默认通过代理 → WARP 双层链路。
-
-## 🔧 本地使用
-
-
-
-## ⏰ 自动更新
-
-GitHub Actions 每天早上 5:00 (北京时间) 自动运行。
-也可在 Actions 页面手动触发 。
+Sing-box config chains all nodes through WARP: node -> WARP outbound.
+Download [singbox_config.json](output/singbox_config.json) and use with sing-box.
