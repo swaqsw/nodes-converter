@@ -58,14 +58,70 @@ def fetch(proto: str, urls: list[str]) -> str | None:
         try:
             r = requests.get(url, timeout=30, verify=False)
             r.raise_for_status()
+            text = r.text
+            # 对 JSON 源做内容预检：无法解析的响应（HTML 错误页 / 空壳 / 截断 / 坏 JSON）直接跳过，换下一个源
+            if proto in ("hysteria", "hysteria2", "singbox", "xray", "juicity"):
+                probe = text.lstrip("\ufeff \t\r\n")
+                if not probe.startswith(("{", "[")):
+                    print(f"  [SKIP] {url[:60]}... 非 JSON 内容 ({len(text)} bytes)")
+                    continue
+                # 这些 JSON 源顶层都是对象；兜底提取可能截到残缺片段（如数组），结构不对也视为无效
+                if not isinstance(extract_json(probe), dict):
+                    print(f"  [SKIP] {url[:60]}... JSON 解析失败 ({len(text)} bytes)")
+                    continue
             print(f"  [OK] {url[:60]}...")
-            return r.text
+            return text
         except Exception as e:
             print(f"  [FAIL] {url[:60]}... {e}")
     return None
 
 
 # ---- Parsers ----
+
+def extract_json(text: str):
+    """Robust JSON parse: strip BOM/whitespace, try direct parse, then extract
+    the outermost {...} or [...] span if the response is wrapped (e.g. HTML
+    error page or trailing garbage). Returns parsed object or None."""
+    if not text:
+        return None
+    t = text.lstrip("\ufeff \t\r\n")
+    try:
+        return json.loads(t)
+    except Exception:
+        pass
+    for open_ch, close_ch in (("{", "}"), ("[", "]")):
+        start = t.find(open_ch)
+        if start == -1:
+            continue
+        depth = 0
+        in_str = False
+        esc = False
+        end = -1
+        for i in range(start, len(t)):
+            ch = t[i]
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch == open_ch:
+                depth += 1
+            elif ch == close_ch:
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+        if end != -1:
+            try:
+                return json.loads(t[start:end])
+            except Exception:
+                pass
+    return None
 
 def parse_clash_meta(text: str) -> list[dict]:
     data = yaml.safe_load(text)
@@ -91,7 +147,9 @@ def parse_clash_meta(text: str) -> list[dict]:
 
 
 def parse_hysteria(text: str) -> list[dict]:
-    data = json.loads(text)
+    data = extract_json(text)
+    if not isinstance(data, dict):
+        return []
     s = str(data.get("server", "") or "")
     if ":" in s:
         addr, port = s.rsplit(":", 1)
@@ -112,7 +170,9 @@ def parse_hysteria(text: str) -> list[dict]:
 
 
 def parse_hysteria2(text: str) -> list[dict]:
-    data = json.loads(text)
+    data = extract_json(text)
+    if not isinstance(data, dict):
+        return []
     srv = str(data.get("server", "") or "")
     auth = str(data.get("auth", "") or "")
     tls = data.get("tls") or {}
@@ -139,7 +199,7 @@ def parse_hysteria2(text: str) -> list[dict]:
 
 
 def parse_singbox(text: str) -> list[dict]:
-    data = json.loads(text)
+    data = extract_json(text)
     if not isinstance(data, dict):
         return []
     nodes = []
@@ -164,7 +224,7 @@ def parse_singbox(text: str) -> list[dict]:
 
 
 def parse_xray(text: str) -> list[dict]:
-    data = json.loads(text)
+    data = extract_json(text)
     if not isinstance(data, dict):
         return []
     nodes = []
@@ -207,7 +267,9 @@ def parse_xray(text: str) -> list[dict]:
 
 
 def parse_juicity(text: str) -> list[dict]:
-    data = json.loads(text)
+    data = extract_json(text)
+    if not isinstance(data, dict):
+        return []
     s = str(data.get("server", "") or "")
     if ":" in s:
         addr, port = s.rsplit(":", 1)
@@ -382,7 +444,11 @@ def main():
         parser = PARSERS.get(name)
         if parser is None:
             continue
-        parsed = parser(text)
+        try:
+            parsed = parser(text)
+        except Exception as e:
+            print(f"  [PARSE FAIL] {name}: {e}")
+            continue
         print(f"  Parsed {len(parsed)} node(s)")
         all_nodes.extend(parsed)
 
