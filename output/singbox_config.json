@@ -61,6 +61,23 @@
       }
     },
     {
+      "type": "hysteria",
+      "tag": "sg-Alvin9999-newpac",
+      "server": "195.154.44.227",
+      "server_port": 55668,
+      "auth_str": "github.com/Alvin9999-newpac/fanqiang",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "bing.com",
+        "alpn": [
+          "h3"
+        ]
+      },
+      "up_mbps": 20,
+      "down_mbps": 20
+    },
+    {
       "type": "vless",
       "tag": "xray-proxy",
       "server": "62.210.70.194",
@@ -91,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "kDRY2OFheEOwca5sE2PhHnhaamGxVgdDyOc0dDNSnUA=",
+      "private_key": "gCRUrDdngZAaK/ApHYSt5nOl7/c0odn0pxRTinHgBFo=",
       "mtu": 1280,
       "peers": [
         {
@@ -113,6 +130,7 @@
         "https://github.com/Alvin9999-newpac/fanq",
         "hysteria-gitlab",
         "hysteria2-gitlab",
+        "sg-Alvin9999-newpac",
         "xray-proxy"
       ]
     }

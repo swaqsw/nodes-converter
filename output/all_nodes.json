@@ -39,6 +39,20 @@
     "down": "55 mbps"
   },
   {
+    "protocol": "hysteria",
+    "name": "sg-Alvin9999-newpac",
+    "server": "195.154.44.227",
+    "port": 55668,
+    "auth": "github.com/Alvin9999-newpac/fanqiang",
+    "sni": "bing.com",
+    "skip_cert_verify": true,
+    "alpn": [
+      "h3"
+    ],
+    "up": "20",
+    "down": "20"
+  },
+  {
     "protocol": "vless",
     "name": "xray-proxy",
     "server": "62.210.70.194",
