@@ -28,10 +28,10 @@ proxies:
   down: 55 Mbps
 - name: hysteria2-gitlab
   type: hysteria2
-  server: 62.210.7.139
-  port: 60111
-  password: github.com/Alvin9999-newpac/fanqiang
-  sni: bing.com
+  server: 2001:bc8:32d7:17b::3
+  port: 22000
+  password: dongtaiwang.com
+  sni: www.microsoft.com
   skip-cert-verify: true
   up: 11 Mbps
   down: 55 Mbps
@@ -64,6 +64,6 @@ proxies:
   server: engage.cloudflareclient.com
   port: 2408
   ip: 172.16.0.2/32
-  private-key: IAkNkf1J10l8iCp40Y4g1FcM9ukI2dp719TBicgbxU4=
+  private-key: GMZPg9MkeOQ9zTYdjwTVbQIwubYZgg6c+vVkUYMlbHY=
   public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
   mtu: 1280

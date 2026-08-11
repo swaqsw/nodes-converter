@@ -30,10 +30,10 @@
   {
     "protocol": "hysteria2",
     "name": "hysteria2-gitlab",
-    "server": "62.210.7.139",
-    "port": 60111,
-    "auth": "github.com/Alvin9999-newpac/fanqiang",
-    "sni": "bing.com",
+    "server": "2001:bc8:32d7:17b::3",
+    "port": 22000,
+    "auth": "dongtaiwang.com",
+    "sni": "www.microsoft.com",
     "skip_cert_verify": true,
     "up": "11 mbps",
     "down": "55 mbps"
@@ -71,9 +71,9 @@
     "protocol": "juicity",
     "name": "juicity-gitlab",
     "server": "fan.193919.xyz",
-    "port": 45889,
-    "uuid": "abbf6900-2bfb-4019-89e4-4875e831cea8",
-    "password": "dongtaiwang.com",
+    "port": 22001,
+    "uuid": "b5ed1193-4ae4-25a1-9a91-15bfc5dc728c",
+    "password": "github.com/Alvin9999-newpac/fanqiang",
     "sni": "fan.193919.xyz",
     "skip_cert_verify": true
   }

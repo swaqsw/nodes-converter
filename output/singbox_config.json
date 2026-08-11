@@ -48,13 +48,13 @@
     {
       "type": "hysteria2",
       "tag": "hysteria2-gitlab",
-      "server": "62.210.7.139",
-      "server_port": 60111,
-      "password": "github.com/Alvin9999-newpac/fanqiang",
+      "server": "2001:bc8:32d7:17b::3",
+      "server_port": 22000,
+      "password": "dongtaiwang.com",
       "tls": {
         "enabled": true,
         "insecure": true,
-        "server_name": "bing.com",
+        "server_name": "www.microsoft.com",
         "alpn": [
           "h3"
         ]
@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "IAkNkf1J10l8iCp40Y4g1FcM9ukI2dp719TBicgbxU4=",
+      "private_key": "GMZPg9MkeOQ9zTYdjwTVbQIwubYZgg6c+vVkUYMlbHY=",
       "mtu": 1280,
       "peers": [
         {
