@@ -15,8 +15,8 @@
       "type": "hysteria",
       "tag": "https://github.com/Alvin9999-newpac/fanq",
       "server": "62.210.70.191",
-      "server_port": 23556,
-      "auth_str": "github.com/Alvin9999-newpac/fanqiang",
+      "server_port": 24667,
+      "auth_str": "dongtaiwang.com",
       "tls": {
         "enabled": true,
         "insecure": true,
@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "oH41g++JVxaIbzYDUiqndTDaGXi3vXPrwCi7mkt6ilA=",
+      "private_key": "4LJhXV/h3P80Bni+KKYQoL1fjCOWaKsAhmK4hTjUFnI=",
       "mtu": 1280,
       "peers": [
         {

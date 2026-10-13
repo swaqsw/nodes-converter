@@ -3,8 +3,8 @@
     "protocol": "hysteria",
     "name": "https://github.com/Alvin9999-newpac/fanqiang",
     "server": "62.210.70.191",
-    "port": 23556,
-    "auth": "github.com/Alvin9999-newpac/fanqiang",
+    "port": 24667,
+    "auth": "dongtaiwang.com",
     "sni": "bing.com",
     "skip_cert_verify": true,
     "alpn": [
