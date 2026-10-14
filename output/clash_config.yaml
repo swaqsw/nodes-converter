@@ -16,10 +16,10 @@ proxies:
   down: 55 Mbps
 - name: hysteria-gitlab
   type: hysteria
-  server: 62.210.70.191
-  port: 23556
-  auth-str: github.com/Alvin9999-newpac/fanqiang
-  sni: bing.com
+  server: 107.149.207.185
+  port: 443
+  auth-str: dongtaiwang.com
+  sni: www.bing.com
   skip-cert-verify: true
   alpn:
   - h3
@@ -49,7 +49,7 @@ proxies:
   down: 20 Mbps
 - name: xray-proxy
   type: vless
-  server: 62.210.70.194
+  server: 2001:bc8:32d7:302::14
   port: 37783
   uuid: a289c660-1b12-432b-a06c-c2ae469272b0
   network: xhttp
@@ -64,6 +64,6 @@ proxies:
   server: engage.cloudflareclient.com
   port: 2408
   ip: 172.16.0.2/32
-  private-key: 4LJhXV/h3P80Bni+KKYQoL1fjCOWaKsAhmK4hTjUFnI=
+  private-key: WC9bYfN9pQ9y8bO2xubtcqyKNKQR8ZQ5WWHr337x1H8=
   public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
   mtu: 1280

@@ -31,13 +31,13 @@
     {
       "type": "hysteria",
       "tag": "hysteria-gitlab",
-      "server": "62.210.70.191",
-      "server_port": 23556,
-      "auth_str": "github.com/Alvin9999-newpac/fanqiang",
+      "server": "107.149.207.185",
+      "server_port": 443,
+      "auth_str": "dongtaiwang.com",
       "tls": {
         "enabled": true,
         "insecure": true,
-        "server_name": "bing.com",
+        "server_name": "www.bing.com",
         "alpn": [
           "h3"
         ]
@@ -80,7 +80,7 @@
     {
       "type": "vless",
       "tag": "xray-proxy",
-      "server": "62.210.70.194",
+      "server": "2001:bc8:32d7:302::14",
       "server_port": 37783,
       "uuid": "a289c660-1b12-432b-a06c-c2ae469272b0",
       "flow": "",
@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "4LJhXV/h3P80Bni+KKYQoL1fjCOWaKsAhmK4hTjUFnI=",
+      "private_key": "WC9bYfN9pQ9y8bO2xubtcqyKNKQR8ZQ5WWHr337x1H8=",
       "mtu": 1280,
       "peers": [
         {
