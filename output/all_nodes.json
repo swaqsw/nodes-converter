@@ -16,10 +16,10 @@
   {
     "protocol": "hysteria",
     "name": "hysteria-gitlab",
-    "server": "107.149.207.185",
+    "server": "137.175.82.44",
     "port": 443,
     "auth": "dongtaiwang.com",
-    "sni": "www.bing.com",
+    "sni": "bing.com",
     "skip_cert_verify": true,
     "alpn": [
       "h3"
