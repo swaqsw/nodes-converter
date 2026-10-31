@@ -1,4 +1,4 @@
-hysteria://62.210.70.191:24667?protocol=udp&auth=dongtaiwang.com&peer=bing.com&insecure=1&alpn=h3&upmbps=11&downmbps=55#https://github.com/Alvin9999-newpac/fanqiang
+hysteria://62.210.28.175:24667?protocol=udp&auth=dongtaiwang.com&peer=bing.com&insecure=1&alpn=h3&upmbps=11&downmbps=55#https://github.com/Alvin9999-newpac/fanqiang
 hysteria://137.175.82.44:443?protocol=udp&auth=dongtaiwang.com&peer=bing.com&insecure=1&alpn=h3&upmbps=11&downmbps=55#hysteria-gitlab
 hysteria2://dongtaiwang.com@2001:bc8:32d7:17b::3:22000?sni=www.microsoft.com&insecure=1&upmbps=11&downmbps=55#hysteria2-gitlab
 hysteria://195.154.44.227:55668?protocol=udp&auth=github.com/Alvin9999-newpac/fanqiang&peer=bing.com&insecure=1&alpn=h3&upmbps=20&downmbps=20#sg-Alvin9999-newpac
