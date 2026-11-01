@@ -41,9 +41,9 @@
   {
     "protocol": "hysteria",
     "name": "sg-Alvin9999-newpac",
-    "server": "195.154.44.227",
-    "port": 55668,
-    "auth": "github.com/Alvin9999-newpac/fanqiang",
+    "server": "137.175.82.43",
+    "port": 443,
+    "auth": "dongtaiwang.com",
     "sni": "bing.com",
     "skip_cert_verify": true,
     "alpn": [
