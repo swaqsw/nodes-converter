@@ -32,7 +32,7 @@
       "type": "hysteria",
       "tag": "hysteria-gitlab",
       "server": "137.175.82.44",
-      "server_port": 443,
+      "server_port": 20022,
       "auth_str": "dongtaiwang.com",
       "tls": {
         "enabled": true,
@@ -64,7 +64,7 @@
       "type": "hysteria",
       "tag": "sg-Alvin9999-newpac",
       "server": "137.175.82.43",
-      "server_port": 443,
+      "server_port": 20022,
       "auth_str": "dongtaiwang.com",
       "tls": {
         "enabled": true,
@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "CHMZVcbOOnCrtWlL6oznRiTZRyC2xSXDbFbXBMCpumM=",
+      "private_key": "aIruZYXu/oTLgzXztoNt8dWsbxYz1cal1fZiMjinOkk=",
       "mtu": 1280,
       "peers": [
         {
