@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "+LZAfk/7/o6tuS7IQP28aVczbUEgz+WUlS9O4CJWwFQ=",
+      "private_key": "kKtJYEhnjuUGV21g0C7zDObKU61TskRUixWiQu/aKlw=",
       "mtu": 1280,
       "peers": [
         {
