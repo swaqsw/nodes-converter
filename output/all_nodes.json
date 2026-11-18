@@ -1,8 +1,8 @@
 [
   {
     "protocol": "hysteria",
-    "name": "https://github.com/Alvin9999-newpac/fanqiang",
-    "server": "62.210.28.175",
+    "name": "https://alvin9999.com",
+    "server": "62.210.124.132",
     "port": 24667,
     "auth": "dongtaiwang.com",
     "sni": "bing.com",

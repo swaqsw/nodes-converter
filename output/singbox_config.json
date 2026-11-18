@@ -13,8 +13,8 @@
   "outbounds": [
     {
       "type": "hysteria",
-      "tag": "https://github.com/Alvin9999-newpac/fanq",
-      "server": "62.210.28.175",
+      "tag": "https://alvin9999.com",
+      "server": "62.210.124.132",
       "server_port": 24667,
       "auth_str": "dongtaiwang.com",
       "tls": {
@@ -108,7 +108,7 @@
       "local_address": [
         "172.16.0.2/32"
       ],
-      "private_key": "OHa4tGPtJGdYtnOTOtGlWqNL9kQyVam8sVLmMFUM5W0=",
+      "private_key": "UHSbT3GcjDd8mTELXz64+u3Z+MrczCr9UPDagzVcmWo=",
       "mtu": 1280,
       "peers": [
         {
@@ -127,7 +127,7 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "https://github.com/Alvin9999-newpac/fanq",
+        "https://alvin9999.com",
         "hysteria-gitlab",
         "hysteria2-gitlab",
         "sg-Alvin9999-newpac",
