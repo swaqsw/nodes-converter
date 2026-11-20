@@ -16,7 +16,7 @@
   {
     "protocol": "hysteria",
     "name": "hysteria-gitlab",
-    "server": "137.175.82.42",
+    "server": "137.175.82.41",
     "port": 20022,
     "auth": "dongtaiwang.com",
     "sni": "bing.com",
@@ -41,7 +41,7 @@
   {
     "protocol": "hysteria",
     "name": "sg-https://alvin9999.com",
-    "server": "137.175.82.42",
+    "server": "137.175.82.41",
     "port": 20022,
     "auth": "dongtaiwang.com",
     "sni": "bing.com",
